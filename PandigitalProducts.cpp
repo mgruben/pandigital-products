@@ -50,10 +50,16 @@ bool isOneNineUnusual(int n) {
  * a total of 10 digits).
  * 
  * Accordingly, only check up to 9999 (99*101) inclusive.
+ * 
+ * Additionally, there is no way to arrive at a 9-digit concatenation
+ * without the product being 4 digits.  Products of less than 4 digits
+ * will have factors of less than 5 digits, concatenated.
+ * 
+ * Accordingly, only check from 1000 (1000 * 1) inclusive. 
  */
 int main() {
     int sum = 0;
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 1000; i < 10000; i++) {
         if (isOneNineUnusual(i)) sum += i;
     }
     cout << sum << endl;
