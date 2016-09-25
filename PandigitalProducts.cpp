@@ -3,6 +3,12 @@
 #include <algorithm>
 using namespace std;
 
+/**
+ * Given a string of digits of length n, return true if those
+ * digits are 1 through n, exactly once.
+ * 
+ * Otherwise, return false.
+ */
 bool isPandigital(string s) {
     sort(begin(s), end(s));
     for (int i = 0; i < s.length(); i++) {
@@ -11,7 +17,12 @@ bool isPandigital(string s) {
     return true;
 }
 
-bool isUnusual(int n) {
+/**
+ * Given a number n, return true if there is some factorization
+ * of that number which, together with the number itself, is
+ * 1-9 pandigital.
+ */
+bool isOneNineUnusual(int n) {
     /* For each factor we find, n / (that factor) is itself
      * another factor, so add that to our sum as well.
      * 
@@ -23,13 +34,28 @@ bool isUnusual(int n) {
         if ((n % i) == 0) {
             s += to_string(i);
             s += to_string(n/i);
-            if (isPandigital(s)) return true;
+            if (s.length() == 9 && isPandigital(s)) return true;
         }
     }
     return false;
 }
 
+/**
+ * Find the sum of all products whose factors, concatenated with
+ * the product, is 1-9 pandigital.
+ * 
+ * This of course means that the maximum length of the concatenated
+ * string is 9, meaning that a 5-digit number is not possible (since,
+ * at minimum, it would require a 3-digit and a 2-digit factor, for
+ * a total of 10 digits).
+ * 
+ * Accordingly, only check up to 9999 (99*101) inclusive.
+ */
 int main() {
-    cout << isUnusual(7254) << endl;
+    int sum = 0;
+    for (int i = 0; i < 10000; i++) {
+        if (isOneNineUnusual(i)) sum += i;
+    }
+    cout << sum << endl;
     return 0;
 }
