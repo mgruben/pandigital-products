@@ -4,9 +4,7 @@
 using namespace std;
 
 bool isPandigital(string s) {
-    cout << s << endl;
     sort(begin(s), end(s));
-    cout << s << endl;
     for (int i = 0; i < s.length(); i++) {
         if (s[i] != i+1 + '0') return false;
     }
@@ -32,6 +30,6 @@ bool isUnusual(int n) {
 }
 
 int main() {
-    cout << isPandigital("15234") << endl;
+    cout << isUnusual(7254) << endl;
     return 0;
 }
